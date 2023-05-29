@@ -1,25 +1,33 @@
 const router = require("express").Router();
-const { Task } = require("../../models");
+const { Task, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // Use withAuth middleware to prevent access to route
 //display tasks
-router.get("/", withAuth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ["password"] },
-      include: [{ model: Task }],
+    let userId = 4;
+    console.log("userId", userId);
+    const taskData = await Task.findAll({
+      where: {
+        user_id: userId,
+      },
     });
 
-    const user = userData.get({ plain: true });
+    console.log(taskData);
+
+    const tasks = taskData.map((task) => task.get({ plain: true }));
+
+    console.log(tasks);
+    // console.log(user.tasks[1]);
 
     res.render("tasklist_with_createtask", {
-      ...user,
-      logged_in: true,
+      tasks,
     });
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 });
 
