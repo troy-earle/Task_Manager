@@ -28,7 +28,7 @@ Task.init(
     },
     // Define the 'priority' column
     priority: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     // Define the 'user_id' column as a foreign key referencing the 'id' column of the 'user' model
