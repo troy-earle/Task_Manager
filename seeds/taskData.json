@@ -1,30 +1,30 @@
 [
     {
-        "name": "creating project structure",
+        "task_name": "creating project structure",
         "priority": 1  
     },
     {
-        "name": "creating README file",
+        "task_name": "creating README file",
         "priority": 3
     },
     {
-        "name": "checking required APIs",
+        "task_name": "checking required APIs",
         "priority": 2
     },
     {
-        "name": "create public for UI purpose",
+        "task_name": "create public for UI purpose",
         "priority": 2
     },
     {
-        "name": "writing codes for handlebars",
+        "task_name": "writing codes for handlebars",
         "priority": 2
     },
     {
-        "name": "creating issues according to project criteria",
+        "task_name": "creating issues according to project criteria",
         "priority": 1
     },
     {
-        "name": "making a presentation slides",
+        "task_name": "making a presentation slides",
         "priority": 3
     }
 ]
