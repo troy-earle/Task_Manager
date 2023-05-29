@@ -19,7 +19,7 @@ module.exports = {
             // Use a lightning emoji for medium priority
             emoji = `<span for="img" aria-label="Medium Priority">⚡️</span>`;
         } else {
-            // Use a star emoji for low priority (or any other priority that doesn't match high or medium)
+            // Use a star emoji for low priority
             emoji = `<span for="img" aria-label="Low Priority">🌟</span>`;
         }
         return emoji;
