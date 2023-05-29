@@ -1,6 +1,10 @@
+html * {
+  font-family: 'Montserrat', sans-serif;
+}
+
 header, .project:not(:last-child) {
-    border-bottom: 1px solid #ccc;
-  }
+  border-bottom: 1px solid #ccc;
+}
   
 .no-button {
   background: none;
@@ -85,4 +89,32 @@ header, .project:not(:last-child) {
 footer {
   margin-top: 32px!important;
   box-shadow: 0 50vh 0 50vh #333333;
+}
+
+#tasks {
+  border-collapse: collapse;
+  width: 90%;
+  /* display: block; */
+}
+
+#tasks td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tasks tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+#tasks tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+#tasks th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
 }
