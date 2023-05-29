@@ -12,10 +12,10 @@ module.exports = {
         let emoji;
       
         // Determine the appropriate emoji based on the priority level
-        if (priority === 'high') {
+        if (priority === 1 ) {
             // Use a fire emoji for high priority
             emoji = `<span for="img" aria-label="High Priority">🔥</span>`;
-        } else if (priority === 'medium') {
+        } else if (priority === 2) {
             // Use a lightning emoji for medium priority
             emoji = `<span for="img" aria-label="Medium Priority">⚡️</span>`;
         } else {
