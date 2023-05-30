@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Task } = require("../../models");
+const { Task, User } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // Use withAuth middleware to prevent access to route
@@ -14,10 +14,12 @@ router.get("/", async (req, res) => {
         user_id: userId,
       },
     });
+
     console.log(taskData);
     const tasks = taskData.map((task) => task.get({ plain: true }));
     console.log(tasks);
     // console.log(user.tasks[1]);
+
     res.render("tasklist_with_createtask", {
       tasks,
     });

@@ -9,7 +9,7 @@
         <th>Priority</th>
         <th>Completed</th>
       </thead>
-      <tbody>
+      {{!-- <tbody>
         <tr>
           <td>Cleaning the garage</td>
           <td>May 31, 2023</td>
@@ -22,7 +22,18 @@
           <td>Low</td>
           <td><input type="checkbox" />    &nbsp;   </td>          
         </tr>
-      </tbody>
+      </tbody> --}}
+        <tbody>
+    {{#each tasks}}
+    <tr>
+      <td>{{this.task_name}}</td>
+      <td>{{this.due_date}}</td>
+      <td>{{this.priority}}</td>
+      <td>{{this.completed}}</td>
+      <!--property value here-->
+    </tr>
+    {{/each}}
+  </tbody>
     </table>
   </div>
 
