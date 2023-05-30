@@ -9,31 +9,17 @@
         <th>Priority</th>
         <th>Completed</th>
       </thead>
-      {{!-- <tbody>
-        <tr>
-          <td>Cleaning the garage</td>
-          <td>May 31, 2023</td>
-          <td>High</td>
-          <td class = "align-content-center"><input type="checkbox" />    &nbsp;   </td>
+      <tbody id = "tasks-list">
+        {{#each tasks}}
+        <tr data-id={{this.id}}>
+          <td>{{this.task_name}}</td>
+          <td>{{this.due_date}}</td>
+          <td>{{this.priority}}</td>
+          <td>{{this.completed}}</td>
+          <!--property value here-->
         </tr>
-        <tr>
-          <td>Cleaning the room</td>
-          <td>May 30, 2023</td>
-          <td>Low</td>
-          <td><input type="checkbox" />    &nbsp;   </td>          
-        </tr>
-      </tbody> --}}
-        <tbody>
-    {{#each tasks}}
-    <tr>
-      <td>{{this.task_name}}</td>
-      <td>{{this.due_date}}</td>
-      <td>{{this.priority}}</td>
-      <td>{{this.completed}}</td>
-      <!--property value here-->
-    </tr>
-    {{/each}}
-  </tbody>
+        {{/each}}
+      </tbody>
     </table>
   </div>
 
@@ -46,7 +32,7 @@
       </div>
       <div class="form-group">
         <label for="due-date">Due date:</label>
-        <input class="form-input" type="text" id="due-date" />
+        <input class="form-input" type="date" id="due-date" />
       </div>
       <div class="form-group">
         <label for="priority">Priority:</label>
@@ -64,14 +50,3 @@
 <script src="../js/task.js""></script>
 
 
-  {{!-- need to un-comment this part --}}
-  {{!-- <tbody>
-    {{#each tasks}}
-    <tr>
-      <td>{{this.task_name}}</td>
-      <td>{{this.due_date}}</td>
-      <td>{{this.priority}}</td>
-      <!--property value here-->
-    </tr>
-    {{/each}}
-  </tbody> --}}
