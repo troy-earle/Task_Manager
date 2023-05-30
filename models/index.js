@@ -1,6 +1,6 @@
 // Import User and Task models
-const User = require('./User');
-const Task = require('./Task');
+const User = require('./User.js');
+const Task = require('./Task.js');
 
 // Define associations between User and Task models
 User.hasMany(Task, {
