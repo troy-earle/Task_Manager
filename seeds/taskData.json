@@ -1,0 +1,30 @@
+[
+    {
+        "task_name": "creating project structure",
+        "priority": 1  
+    },
+    {
+        "task_name": "creating README file",
+        "priority": 3
+    },
+    {
+        "task_name": "checking required APIs",
+        "priority": 2
+    },
+    {
+        "task_name": "create public for UI purpose",
+        "priority": 2
+    },
+    {
+        "task_name": "writing codes for handlebars",
+        "priority": 2
+    },
+    {
+        "task_name": "creating issues according to project criteria",
+        "priority": 1
+    },
+    {
+        "task_name": "making a presentation slides",
+        "priority": 3
+    }
+]
