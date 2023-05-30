@@ -4,14 +4,13 @@ const withAuth = require("../../utils/auth");
 
 // Use withAuth middleware to prevent access to route
 //display tasks
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    let userId = 4;
-    console.log("userId", userId);
+    console.log("userId", req.session.user_id);
     const taskData = await Task.findAll({
       where: {
-        user_id: userId,
+        user_id: req.session.user_id,
       },
     });
 
@@ -28,7 +27,8 @@ router.get("/", async (req, res) => {
     console.log(err);
   }
 });
-router.get("/:id", withAuth, async (req, res) => {
+
+router.get("/:id",  async (req, res) => {
   try {
     const taskData = await Task.findByPk(req.params.id, {
       include: [
@@ -39,18 +39,19 @@ router.get("/:id", withAuth, async (req, res) => {
       ],
     });
 
-    const Task = taskData.get({ plain: true });
-
-    res.render("TaskView", {
+    const task = taskData.get({ plain: true });
+    //return task;
+    /*res.render("TaskView", {
       ...Task,
       logged_in: req.session.logged_in,
-    });
+    });*/
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
     console.log("trying post");
       const newTask = await Task.create({
@@ -64,7 +65,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id",  async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const taskData = await Task.destroy({
       where: {
