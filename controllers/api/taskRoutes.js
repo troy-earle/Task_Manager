@@ -22,6 +22,7 @@ router.get("/", async (req, res) => {
 
     res.render("tasklist_with_createtask", {
       tasks,
+      logged_in: true,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -53,7 +54,7 @@ router.get("/:id", withAuth, async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     console.log("trying post");
-      const newTask = await Task.create({
+    const newTask = await Task.create({
       ...req.body,
       //user_id: req.session.user_id,
     });
@@ -64,7 +65,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:id",  async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const taskData = await Task.destroy({
       where: {
