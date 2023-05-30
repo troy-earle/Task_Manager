@@ -6,18 +6,13 @@ const withAuth = require("../../utils/auth");
 //display tasks
 router.get("/", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    console.log("userId", req.session.user_id);
     const taskData = await Task.findAll({
       where: {
         user_id: req.session.user_id,
       },
     });
 
-    console.log(taskData);
     const tasks = taskData.map((task) => task.get({ plain: true }));
-    console.log(tasks);
-    // console.log(user.tasks[1]);
 
     res.render("tasklist_with_createtask", {
       tasks,
@@ -29,23 +24,17 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
-router.get("/:id",  async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const taskData = await Task.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-      ],
-    });
+    const taskData = await Task.findByPk(req.params.id, {});
 
-    const task = taskData.get({ plain: true });
-    //return task;
-    /*res.render("TaskView", {
-      ...Task,
-      logged_in: req.session.logged_in,
-    });*/
+    if (!taskData) {
+      res.status(404).json({ message: "No task found with that id!" });
+      return;
+    }
+
+    res.status(200).json(taskData);
+    console.log(taskData);
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
@@ -66,11 +55,7 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-
-
-=======
 router.delete("/:id", withAuth, async (req, res) => {
-
   try {
     const taskData = await Task.destroy({
       where: {
