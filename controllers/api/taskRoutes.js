@@ -14,9 +14,12 @@ router.get("/", withAuth, async (req, res) => {
 
     const tasks = taskData.map((task) => task.get({ plain: true }));
 
-    res.render("tasklist_with_createtask", {
+    res.render("task", {
       tasks,
       logged_in: true,
+      whichPartial: function () {
+        return "createtask";
+      },
     });
   } catch (err) {
     res.status(500).json(err);
@@ -26,15 +29,32 @@ router.get("/", withAuth, async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
+    const tasksData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const tasks = tasksData.map((task) => task.get({ plain: true }));
+
     const taskData = await Task.findByPk(req.params.id, {});
 
     if (!taskData) {
       res.status(404).json({ message: "No task found with that id!" });
       return;
     }
+    const task = taskData.get({ plain: true });
+    console.log(task);
 
-    res.status(200).json(taskData);
-    console.log(taskData);
+    // res.status(200).json(taskData);
+    // console.log(taskData);
+    res.render("task", {
+      task,
+      tasks,
+      whichPartial: function () {
+        return "taskdetails";
+      },
+    });
   } catch (err) {
     res.status(500).json(err);
     console.log(err);

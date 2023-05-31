@@ -2,6 +2,7 @@ const table = document.querySelector("#tasks-list");
 
 //creating a new task
 const newFormHandler = async (event) => {
+  console.log("hey you clicked save");
   event.preventDefault();
 
   const taskName = document.querySelector("#task-name").value.trim();
@@ -32,5 +33,5 @@ table.addEventListener("click", (event) => {
 });
 
 document
-  .querySelector(".new-project-form")
+  .querySelector(".create-task")
   .addEventListener("submit", newFormHandler);
