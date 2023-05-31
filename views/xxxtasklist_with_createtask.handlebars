@@ -1,6 +1,6 @@
 {{!-- This will display a table with the list of tasks --}}
 <div class = "row">
-  <div class="col-md-6">
+  <div class="col-md-6 tabletask">
     <h2>Task list</h2>
     <table id = "tasks">
       <thead>
@@ -11,11 +11,11 @@
       </thead>
       <tbody id = "tasks-list">
         {{#each tasks}}
-        <tr data-id={{this.id}}>
-          <td>{{this.task_name}}</td>
-          <td>{{this.due_date}}</td>
-          <td>{{this.priority}}</td>
-          <td>{{this.completed}}</td>
+        <tr>
+          <td data-id={{this.id}}>{{this.task_name}}</td>
+          <td data-id={{this.id}}>{{this.due_date}}</td>
+          <td data-id={{this.id}}>{{this.priority}}</td>
+          <td data-id={{this.id}}>{{this.completed}}</td>
           <!--property value here-->
         </tr>
         {{/each}}
