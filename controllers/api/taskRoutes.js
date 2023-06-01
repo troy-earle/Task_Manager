@@ -65,9 +65,10 @@ router.get("/:id", async (req, res) => {
 router.post("/", withAuth, async (req, res) => {
   try {
     console.log("trying post");
+    console.log(req.body);
     const newTask = await Task.create({
       ...req.body,
-      //user_id: req.session.user_id,
+      user_id: req.session.user_id,
     });
 
     res.status(200).json(newTask);
