@@ -5,7 +5,6 @@
         <th>Task name</th>
         <th>Due date</th>
         <th>Priority</th>
-        <th>Completed</th>
     </thead>
     <tbody id = "tasks-list">
     {{#each tasks}}
@@ -13,7 +12,6 @@
         <td data-id={{this.id}}>{{this.task_name}}</td>
         <td data-id={{this.id}}>{{this.due_date}}</td>
         <td data-id={{this.id}}>{{this.priority}}</td>
-        <td data-id={{this.id}}>{{this.completed}}</td>
         <!--property value here-->
     </tr>
     {{/each}}
