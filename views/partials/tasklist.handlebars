@@ -10,9 +10,8 @@
     {{#each tasks}}
     <tr>
         <td data-id={{this.id}}>{{this.task_name}}</td>
-        <td data-id={{this.id}}>{{this.due_date}}</td>
+        <td data-id={{this.id}}>{{format_date this.due_date}}</td>
         <td data-id={{this.id}}>{{this.priority}}</td>
-        <!--property value here-->
     </tr>
     {{/each}}
     </tbody>
