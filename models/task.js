@@ -31,11 +31,6 @@ Task.init(
         type: DataTypes.STRING,
         allowNull: false,
     },
-    // Clarify whether task completed or not
-    completed: {
-      type: DataTypes.BOOLEAN,
-      //allowNull: false,
-    },
     // Define the 'user_id' column as a foreign key referencing the 'id' column of the 'user' model
     user_id: {
         type: DataTypes.INTEGER,

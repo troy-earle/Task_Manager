@@ -1,6 +1,6 @@
 <div class="col-md-6">
 <h2>Update task</h2>
-<form class="create-task">
+<form class="update-task">
     <div class="form-group">
         <label for="task-name">Task name:</label>
         <input class="form-input" type="text" id="task-name" value="{{task.task_name}}">
@@ -11,11 +11,16 @@
     </div>
     <div class="form-group">
         <label for="priority">Priority:</label>
-        <input class="form-input" type="text" id="priority" value={{task.priority}}>
+        <select class="form-input" id="priority"> 
+            <option value="low">Low</option> 
+            <option value="medium">Medium</option> 
+            <option value="high">High</option> 
+        </select>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary" type="cancel">Cancel</button>
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary cancel" type="cancel">Cancel</button>
+        <button class="btn btn-primary save" type="save">Save</button>
+        <button class="btn btn-primary complete" type="complete">Complete task</button>
     </div>
 </form>
 </div>
