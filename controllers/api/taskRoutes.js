@@ -27,7 +27,7 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", withAuth, async (req, res) => {
   try {
     const tasksData = await Task.findAll({
       where: {
@@ -77,10 +77,10 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-
-router.put('/:id', withAuth, async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
   try {
     console.log("trying update");
+    console.log(req.session.user_id);
     const taskData = await Task.update(
       {
         ...req.body,
@@ -94,12 +94,13 @@ router.put('/:id', withAuth, async (req, res) => {
     );
 
     if (taskData[0] === 0) {
-      return res.status(404).json({ error: 'No task found with this id!' });
+      return res.status(404).json({ error: "No task found with this id!" });
     }
 
-    res.status(200).json({ message: 'Task updated successfully' });
+    res.status(200).json({ message: "Task updated successfully" });
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 });
 

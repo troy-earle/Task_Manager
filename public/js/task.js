@@ -1,5 +1,4 @@
 const table = document.querySelector("#tasks-list");
-let id;
 
 //creating a new task
 const newFormHandler = async (event) => {
@@ -20,16 +19,15 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace("/api/tasks");
+      window.location.replace("/api/tasks");
     } else {
       alert("Failed to create task");
     }
   }
 };
 
+//updating a task
 const updateTaskhandler = async (event) => {
-  console.log("hey you are updating");
-
   event.preventDefault();
 
   const task_name = document.querySelector("#task-name").value.trim();
@@ -37,6 +35,11 @@ const updateTaskhandler = async (event) => {
   const priority = document.querySelector("#priority").value.trim();
 
   if (task_name && due_date && priority) {
+    const str = window.location.href;
+    const id = str.slice(str.lastIndexOf("/") + 1);
+
+    console.log("hey you are updating", id);
+
     const response = await fetch(`/api/tasks/` + id, {
       method: "PUT",
       body: JSON.stringify({ task_name, due_date, priority }),
@@ -46,7 +49,7 @@ const updateTaskhandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace("/api/tasks");
+      window.location.replace("/api/tasks");
     } else {
       alert("Failed to create task");
     }
@@ -54,14 +57,33 @@ const updateTaskhandler = async (event) => {
 };
 
 const cancelHandler = async (event) => {
+  event.preventDefault();
   console.log("hey you are cancelling");
-  document.location.replace("../");
+  window.location = "/api/tasks/";
 };
 
-table.addEventListener("click", (event, id) => {
+const completeHandler = async (event) => {
+  event.preventDefault();
+  console.log("hey you are deleting");
+
+  const str = window.location.href;
+  const id = str.slice(str.lastIndexOf("/") + 1);
+
+  const response = await fetch(`/api/tasks/${id}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    window.location = "/api/tasks/";
+  } else {
+    alert("Failed to delete task");
+  }
+};
+
+table.addEventListener("click", (event) => {
   const element = event.target;
-  id = element.getAttribute("data-id");
-  document.location.replace("/api/tasks/" + id);
+  const id = element.getAttribute("data-id");
+  window.location.replace("/api/tasks/" + id);
 });
 
 if (document.querySelector(".create-task")) {
@@ -76,4 +98,6 @@ if (document.querySelector(".create-task")) {
   save.addEventListener("click", updateTaskhandler);
 
   cancel.addEventListener("click", cancelHandler);
+
+  complete.addEventListener("click", completeHandler);
 }
