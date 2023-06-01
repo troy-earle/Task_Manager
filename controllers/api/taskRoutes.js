@@ -4,26 +4,22 @@ const withAuth = require("../../utils/auth");
 
 // Use withAuth middleware to prevent access to route
 //display tasks
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
-    // Find the logged in user based on the session ID
-    let userId = 4;
-    console.log("userId", userId);
     const taskData = await Task.findAll({
       where: {
-        user_id: userId,
+        user_id: req.session.user_id,
       },
     });
 
-    console.log(taskData);
-
     const tasks = taskData.map((task) => task.get({ plain: true }));
 
-    console.log(tasks);
-    // console.log(user.tasks[1]);
-
-    res.render("tasklist_with_createtask", {
+    res.render("task", {
       tasks,
+      logged_in: true,
+      whichPartial: function () {
+        return "createtask";
+      },
     });
   } catch (err) {
     res.status(500).json(err);
@@ -31,33 +27,47 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/Tasks/:id", withAuth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const taskData = await Task.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ["name"],
-        },
-      ],
+    const tasksData = await Task.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
     });
 
-    const Task = taskData.get({ plain: true });
+    const tasks = tasksData.map((task) => task.get({ plain: true }));
 
-    res.render("TaskView", {
-      ...Task,
-      logged_in: req.session.logged_in,
+    const taskData = await Task.findByPk(req.params.id, {});
+
+    if (!taskData) {
+      res.status(404).json({ message: "No task found with that id!" });
+      return;
+    }
+    const task = taskData.get({ plain: true });
+    console.log("abc", task);
+
+    // res.status(200).json(taskData);
+    // console.log(taskData);
+    res.render("task", {
+      task,
+      tasks,
+      logged_in: true,
+      whichPartial: function () {
+        return "taskdetails";
+      },
     });
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 });
 
 router.post("/", withAuth, async (req, res) => {
   try {
+    console.log("trying post");
     const newTask = await Task.create({
       ...req.body,
-      user_id: req.session.user_id,
+      //user_id: req.session.user_id,
     });
 
     res.status(200).json(newTask);
@@ -71,7 +81,7 @@ router.delete("/:id", withAuth, async (req, res) => {
     const taskData = await Task.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id,
+        //user_id: req.session.user_id,
       },
     });
 

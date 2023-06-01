@@ -1,5 +1,8 @@
+const table = document.querySelector("#tasks-list");
+
 //creating a new task
 const newFormHandler = async (event) => {
+  console.log("hey you clicked save");
   event.preventDefault();
 
   const taskName = document.querySelector("#task-name").value.trim();
@@ -7,7 +10,7 @@ const newFormHandler = async (event) => {
   const priority = document.querySelector("#priority").value.trim();
 
   if (taskName && dueDate && priority) {
-    const response = await fetch(`/api/projects`, {
+    const response = await fetch(`/api/tasks`, {
       method: "POST",
       body: JSON.stringify({ taskName, dueDate, priority }),
       headers: {
@@ -23,15 +26,12 @@ const newFormHandler = async (event) => {
   }
 };
 
-//on click of a task in the table, load the task details using a route
+table.addEventListener("click", (event) => {
+  const element = event.target;
+  const id = element.getAttribute("data-id");
+  document.location.replace("/api/tasks/" + id);
+});
 
-window.onload = function () {
-  var table = document.getElementById("tasks");
-  var rows = table.getElementsByTagName("tr");
-
-  for (var i = 0; i < rows.length; i++) {
-    rows[i].addEventListener("click", function () {
-      window.location.href = "newpage.html"; //this will need to call the route
-    });
-  }
-};
+document
+  .querySelector(".create-task")
+  .addEventListener("submit", newFormHandler);
