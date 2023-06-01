@@ -44,13 +44,14 @@ router.get("/:id", async (req, res) => {
       return;
     }
     const task = taskData.get({ plain: true });
-    console.log(task);
+    console.log("abc", task);
 
     // res.status(200).json(taskData);
     // console.log(taskData);
     res.render("task", {
       task,
       tasks,
+      logged_in: true,
       whichPartial: function () {
         return "taskdetails";
       },
