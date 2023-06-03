@@ -23,7 +23,7 @@ router.get("/", withAuth, async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
+    // console.log(err);
   }
 });
 
@@ -44,7 +44,7 @@ router.get("/:id", withAuth, async (req, res) => {
       return;
     }
     const task = taskData.get({ plain: true });
-    console.log("abc", task);
+    // console.log("abc", task);
 
     // res.status(200).json(taskData);
     // console.log(taskData);
@@ -58,7 +58,7 @@ router.get("/:id", withAuth, async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
+    // console.log(err);
   }
 });
 
@@ -79,8 +79,8 @@ router.post("/", withAuth, async (req, res) => {
 
 router.put("/:id", withAuth, async (req, res) => {
   try {
-    console.log("trying update");
-    console.log(req.session.user_id);
+    // console.log("trying update");
+    // console.log(req.session.user_id);
     const taskData = await Task.update(
       {
         ...req.body,
@@ -100,7 +100,7 @@ router.put("/:id", withAuth, async (req, res) => {
     res.status(200).json({ message: "Task updated successfully" });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
+    // console.log(err);
   }
 });
 

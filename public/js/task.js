@@ -2,7 +2,7 @@ const table = document.querySelector("#tasks-list");
 
 //creating a new task
 const newFormHandler = async (event) => {
-  console.log("hey you clicked save");
+  // console.log("hey you clicked save");
   event.preventDefault();
 
   const task_name = document.querySelector("#task-name").value.trim();
@@ -23,6 +23,8 @@ const newFormHandler = async (event) => {
     } else {
       alert("Failed to create task");
     }
+  } else {
+    alert("Please make sure that all fields are complete.");
   }
 };
 
@@ -38,7 +40,7 @@ const updateTaskhandler = async (event) => {
     const str = window.location.href;
     const id = str.slice(str.lastIndexOf("/") + 1);
 
-    console.log("hey you are updating", id);
+    // console.log("hey you are updating", id);
 
     const response = await fetch(`/api/tasks/` + id, {
       method: "PUT",
@@ -51,20 +53,22 @@ const updateTaskhandler = async (event) => {
     if (response.ok) {
       window.location.replace("/api/tasks");
     } else {
-      alert("Failed to create task");
+      alert("Failed to update task");
     }
+  } else {
+    alert("Please make sure that all fields are complete.");
   }
 };
 
 const cancelHandler = async (event) => {
   event.preventDefault();
-  console.log("hey you are cancelling");
+  // console.log("hey you are cancelling");
   window.location = "/api/tasks/";
 };
 
 const completeHandler = async (event) => {
   event.preventDefault();
-  console.log("hey you are deleting");
+  // console.log("hey you are deleting");
 
   const str = window.location.href;
   const id = str.slice(str.lastIndexOf("/") + 1);
