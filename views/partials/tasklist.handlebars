@@ -1,6 +1,7 @@
 <div class="col-md-6 tabletask">
 <h2>Task list</h2>
 <table id = "tasks">
+    <br>
     <thead>
         <th>Task name</th>
         <th>Due date</th>
@@ -10,10 +11,11 @@
     {{#each tasks}}
     <tr>
         <td data-id={{this.id}}>{{this.task_name}}</td>
-        <td data-id={{this.id}}>{{format_date this.due_date}}</td>
+        <td data-id={{this.id}}>{{format_date_display this.due_date}}</td>
         <td data-id={{this.id}}>{{this.priority}}</td>
     </tr>
     {{/each}}
     </tbody>
 </table>
+    <br>
 </div>
