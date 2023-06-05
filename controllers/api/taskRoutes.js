@@ -23,7 +23,6 @@ router.get("/", withAuth, async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    // console.log(err);
   }
 });
 
@@ -44,10 +43,7 @@ router.get("/:id", withAuth, async (req, res) => {
       return;
     }
     const task = taskData.get({ plain: true });
-    // console.log("abc", task);
 
-    // res.status(200).json(taskData);
-    // console.log(taskData);
     res.render("task", {
       task,
       tasks,
@@ -58,13 +54,11 @@ router.get("/:id", withAuth, async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    // console.log(err);
   }
 });
 
 router.post("/", withAuth, async (req, res) => {
   try {
-    console.log("trying post");
     console.log(req.body);
     const newTask = await Task.create({
       ...req.body,
@@ -79,8 +73,6 @@ router.post("/", withAuth, async (req, res) => {
 
 router.put("/:id", withAuth, async (req, res) => {
   try {
-    // console.log("trying update");
-    // console.log(req.session.user_id);
     const taskData = await Task.update(
       {
         ...req.body,
@@ -93,14 +85,10 @@ router.put("/:id", withAuth, async (req, res) => {
       }
     );
 
-    if (taskData[0] === 0) {
-      return res.status(404).json({ error: "No task found with this id!" });
-    }
-
     res.status(200).json({ message: "Task updated successfully" });
   } catch (err) {
     res.status(500).json(err);
-    // console.log(err);
+    console.log(err);
   }
 });
 
