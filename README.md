@@ -66,6 +66,6 @@ To use this application, please follow these steps:
 Contributions are welcome! Please submit a pull request if you find any issues or have suggestions for improvement.
 
 
-## Heroku Link
+## Heroku Link: https://group6-task-manager.herokuapp.com/
 
 
