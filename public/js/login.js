@@ -24,6 +24,8 @@ const loginFormHandler = async (event) => {
       console.error(error);
       alert("An error occurred during login");
     }
+  } else {
+    alert("Please enter your email address and password.");
   }
 };
 
@@ -52,6 +54,8 @@ const signupFormHandler = async (event) => {
       console.error(error);
       alert("An error occurred during login");
     }
+  } else {
+    alert("Please enter your name, email address and password.");
   }
 };
 
