@@ -1,15 +1,18 @@
 const logout = async () => {
-    const response = await fetch('/api/users/logout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    });
-  
-    if (response.ok) {
+  try {
+    const response = await axios.post('/api/users/logout', {});
+
+    if (response.status === 200) {
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      alert('Logout failed');
     }
-  };
-  
-  document.querySelector('#logout').addEventListener('click', logout);
+  } catch (error) {
+    console.error(error);
+    alert('An error occurred during logout');
+  }
+};
+
+document.querySelector('#logout').addEventListener('click', logout);
+
   
