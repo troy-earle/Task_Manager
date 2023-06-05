@@ -2,7 +2,6 @@ const table = document.querySelector("#tasks-list");
 
 //creating a new task
 const newFormHandler = async (event) => {
-  // console.log("hey you clicked save");
   event.preventDefault();
 
   const task_name = document.querySelector("#task-name").value.trim();
@@ -14,7 +13,7 @@ const newFormHandler = async (event) => {
       const response = await axios.post(`/api/tasks`, {
         task_name,
         due_date,
-        priority
+        priority,
       });
 
       if (response.status === 200) {
@@ -32,7 +31,6 @@ const newFormHandler = async (event) => {
   }
 };
 
-
 //updating a task
 const updateTaskhandler = async (event) => {
   event.preventDefault();
@@ -42,10 +40,10 @@ const updateTaskhandler = async (event) => {
   const priority = document.querySelector("#priority").value.trim();
 
   if (task_name && due_date && priority) {
-
     try {
       const str = window.location.href;
       const id = str.slice(str.lastIndexOf("/") + 1);
+      console.log(id);
 
       const response = await axios.put(`/api/tasks/` + id, {
         task_name,
@@ -62,7 +60,6 @@ const updateTaskhandler = async (event) => {
       // Handle any errors here
       console.error(error);
       alert("An error occurred during updating task");
-
     }
   } else {
     alert("Please make sure that all fields are complete.");
@@ -72,13 +69,11 @@ const updateTaskhandler = async (event) => {
 
 const cancelHandler = async (event) => {
   event.preventDefault();
-  // console.log("hey you are cancelling");
   window.location = "/api/tasks/";
 };
 
 const completeHandler = async (event) => {
   event.preventDefault();
-  // console.log("hey you are deleting");
 
   const str = window.location.href;
   const id = str.slice(str.lastIndexOf("/") + 1);
@@ -97,8 +92,6 @@ const completeHandler = async (event) => {
   }
   return false;
 };
-
-
 
 table.addEventListener("click", (event) => {
   const element = event.target;
