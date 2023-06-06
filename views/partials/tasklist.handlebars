@@ -1,4 +1,5 @@
 <div class="col-md-6 tabletask">
+<!-- Task list section -->
 <h2>Task list</h2>
 <table id = "tasks">
     <br>
@@ -8,11 +9,12 @@
         <th>Priority</th>
     </thead>
     <tbody id = "tasks-list">
+    <!-- Iterate over each task -->
     {{#each tasks}}
     <tr>
-        <td data-id={{this.id}}>{{this.task_name}}</td>
-        <td data-id={{this.id}}>{{format_date_display this.due_date}}</td>
-        <td data-id={{this.id}}>{{this.priority}}</td>
+        <td data-id={{this.id}}>{{this.task_name}}</td>  <!-- Task name -->
+        <td data-id={{this.id}}>{{format_date_display this.due_date}}</td>  <!-- Due date -->
+        <td data-id={{this.id}}>{{this.priority}}</td>  <!-- Priority -->
     </tr>
     {{/each}}
     </tbody>
