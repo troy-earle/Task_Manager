@@ -26,6 +26,7 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+// route to display individual task
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const tasksData = await Task.findAll({
@@ -57,6 +58,7 @@ router.get("/:id", withAuth, async (req, res) => {
   }
 });
 
+//route to create task
 router.post("/", withAuth, async (req, res) => {
   try {
     console.log(req.body);
@@ -71,6 +73,7 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
+//route to update task
 router.put("/:id", withAuth, async (req, res) => {
   try {
     const taskData = await Task.update(
@@ -92,12 +95,12 @@ router.put("/:id", withAuth, async (req, res) => {
   }
 });
 
+//route to delete a task
 router.delete("/:id", withAuth, async (req, res) => {
   try {
     const taskData = await Task.destroy({
       where: {
         id: req.params.id,
-        //user_id: req.session.user_id,
       },
     });
 
