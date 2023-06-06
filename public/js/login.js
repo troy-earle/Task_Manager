@@ -1,3 +1,4 @@
+// Login form handler
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -29,6 +30,8 @@ const loginFormHandler = async (event) => {
   }
 };
 
+
+// Signup form handler
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -38,6 +41,7 @@ const signupFormHandler = async (event) => {
 
   if (name && email && password) {
     try {
+      // Send a POST request to the API endpoint using Axios
       const response = await axios.post("/api/users", {
         name,
         email,
@@ -45,6 +49,7 @@ const signupFormHandler = async (event) => {
       });
 
       if (response.status === 200) {
+        // If successful, redirect the browser to the profile page
         document.location.replace("/api/tasks");
       } else {
         alert("Sign up failed");
@@ -59,6 +64,7 @@ const signupFormHandler = async (event) => {
   }
 };
 
+// Attach event listeners to the login and signup forms
 document
   .querySelector(".login-form")
   .addEventListener("submit", loginFormHandler);
